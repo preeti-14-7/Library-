@@ -1,0 +1,15 @@
+
+body{
+  padding: 25px;
+}
+
+.newbook{
+  position:absolute;                 
+  bottom: 30px;                         
+  right:30px;  
+  padding: 15px;                  
+}
+.material-icons{
+  font-family: 'Material Icons';
+}
+

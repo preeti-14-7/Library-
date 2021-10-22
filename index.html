@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Library </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>My collection of Books</h1>
+
+    <div class="new-book-form">
+        <h2 class="form_title">Add new book</h2>
+
+        <label for="b-title">Book title*
+            <input class="form-control" type="text" name="book-title" id="b-title" placeholder="Title"></label>
+        <label for="b-author">Book author*
+            <input class="form-control" type="text" name="book-author" id="b-author" placeholder="Author"></label>
+        <label for="b-nbr_of_pages">Number of pages*
+            <input class="form-control" type="number" name="pages-count" id="b-nbr_of_pages"
+                placeholder="Number of pages" min="1"></label>
+        <label for="b-read_status">book status*
+            <select class="form-control" name="book-status" id="b-read_status">
+                <option value="null" disabled="" selected="">
+                    Select?
+                </option>
+                <option value="true">read </option>
+                <option value="false">not read Yet</option>
+            </select><small class="err-msg" style="display: none;">* Book reading status is required</small>
+        </label>
+        <div class="new-book-buttons">
+            <button class="submit">add</button>
+        </div>
+    </div>
+    <footer>
+        <button class="newbook"><span class="material-icons"> add </span></button>
+    </footer>
+    <script src="app.js" async defer></script>
+</body>
+
+</html>
