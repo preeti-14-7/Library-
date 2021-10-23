@@ -18,17 +18,17 @@
 <body>
     <h1>My collection of Books</h1>
 
-    <div class="new-book-form">
+    <div class="new-book-form" id ="pop">
         <h2 class="form_title">Add new book</h2>
-
+       <button data-close-button class="close"> X</button> 
         <label for="b-title">Book title*
             <input class="form-control" type="text" name="book-title" id="b-title" placeholder="Title"></label>
-        <label for="b-author">Book author*
+        <br><label for="b-author">Book author*
             <input class="form-control" type="text" name="book-author" id="b-author" placeholder="Author"></label>
-        <label for="b-nbr_of_pages">Number of pages*
+      <br>  <label for="b-nbr_of_pages">Number of pages*
             <input class="form-control" type="number" name="pages-count" id="b-nbr_of_pages"
                 placeholder="Number of pages" min="1"></label>
-        <label for="b-read_status">book status*
+       <br> <label for="b-read_status">book status*
             <select class="form-control" name="book-status" id="b-read_status">
                 <option value="null" disabled="" selected="">
                     Select?
@@ -36,13 +36,15 @@
                 <option value="true">read </option>
                 <option value="false">not read Yet</option>
             </select><small class="err-msg" style="display: none;">* Book reading status is required</small>
-        </label>
+     <br>   </label>
         <div class="new-book-buttons">
+            <br>
             <button class="submit">add</button>
         </div>
     </div>
+    
     <footer>
-        <button class="newbook"><span class="material-icons"> add </span></button>
+        <button class="newbook" data-modal-target="#pop"><span class="material-icons"> add </span></button>
     </footer>
     <script src="app.js" async defer></script>
 </body>
