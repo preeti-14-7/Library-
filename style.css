@@ -26,6 +26,9 @@ body{
   background-color: #fff;
   transform: translate(-50%, -50%) scale(0);
   transition: 200ms ease-in-out;
+  position: fixed;
+  top: 50%;
+  left: 50%;
 }
 
 .new-book-form.active {
