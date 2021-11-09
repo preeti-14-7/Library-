@@ -15,12 +15,9 @@ function Book(title, author, pages, isRead) {
 
 
 function display() {
-  // do stuff here
- // checkLocalStorage();
- //console.log(myLibrary);
+ 
   const list = document.querySelector('#book-list');
-
-  
+  list.innerHTML = "";
   if(myLibrary != null)
   myLibrary.forEach((book) => {
     const row = document.createElement('tr');
@@ -81,14 +78,12 @@ function updateLocalStorage() {
 function restore() {
       let objects = window.localStorage.getItem('myLibrary');
       objects = JSON.parse(objects);
-      console.log(objects);
       if(objects != null)
       {
         for(let i=0; i<objects.length; i++)
           myLibrary.push(objects[i]);
           
       }
-      console.log(myLibrary);
       display();
   
 }
