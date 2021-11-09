@@ -1,47 +1,73 @@
+
+
+
 let myLibrary = [];
 
-function Book() {
+function Book(title, author, pages, isRead) {
   // the constructor...
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+  this.isRead = isRead;
 
 }
 
-function addBookToLibrary() {
+
+
+function display(book) {
   // do stuff here
+  const list = document.querySelector('#book-list');
+
+  const row = document.createElement('tr');
+
+  row.innerHTML = `
+      <td>${book.title}</td>
+      <td>${book.author}</td>
+      <td>${book.pages}</td>
+      <td>${book.isRead}</td>
+      <td><a href="#" class="btn btn-danger btn-sm delete">X</a></td>
+    `;
+  list.appendChild(row);
+
+
+}
+
+//for modal form 
+let modalBtn = document.getElementById("modal-btn")
+let modal = document.querySelector(".container")
+let closeBtn = document.querySelector(".close")
+modalBtn.onclick = function () {
+  modal.style.display = "block"
+}
+closeBtn.onclick = function () {
+  modal.style.display = "none"
+}
+window.onclick = function (e) {
+  if (e.target == modal) {
+    modal.style.display = "none"
+  }
 }
 
 
+const form  = document.querySelector('form');
+
+function addBookToLibrary(event) {
+  // handle the form data
+  event.preventDefault();
+  let  bookName = document.getElementById('title').value;
+  let  authorName = document.getElementById('author').value;
+  let  numberOfpages = document.getElementById('pages').value;
+  let  bookStatus = document.getElementById('status').checked;
+  let  book = new Book(bookName,authorName,numberOfpages,bookStatus);
+  display(book);
+  myLibrary.push(book);
+  console.log(myLibrary);
+  modal.style.display = "none"
+
+} 
+
+form.addEventListener('submit', addBookToLibrary);
 
 
 
-//for pop up form 
-const openModalButtons = document.querySelectorAll('[data-modal-target]')
-const closeModalButtons = document.querySelectorAll('[data-close-button]')
 
-
-openModalButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const modal = document.querySelector(button.dataset.modalTarget)
-    openModal(modal)
-  })
-})
-
-
-
-closeModalButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const modal = button.closest('.new-book-form')
-    closeModal(modal)
-  })
-})
-
-function openModal(modal) {
-  if (modal == null) return
-  modal.classList.add('active')
- 
-}
-
-function closeModal(modal) {
-  if (modal == null) return
-  modal.classList.remove('active')
- 
-}
