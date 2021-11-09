@@ -14,21 +14,25 @@ function Book(title, author, pages, isRead) {
 
 
 
-function display(book) {
+function display() {
   // do stuff here
+ // checkLocalStorage();
+ //console.log(myLibrary);
   const list = document.querySelector('#book-list');
 
-  const row = document.createElement('tr');
-
-  row.innerHTML = `
+  
+  if(myLibrary != null)
+  myLibrary.forEach((book) => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
       <td>${book.title}</td>
       <td>${book.author}</td>
       <td>${book.pages}</td>
       <td>${book.isRead}</td>
       <td><a href="#" class="btn btn-danger btn-sm delete">X</a></td>
     `;
-  list.appendChild(row);
-
+    list.appendChild(row);
+  });
 
 }
 
@@ -49,24 +53,47 @@ window.onclick = function (e) {
 }
 
 
-const form  = document.querySelector('form');
+const form = document.querySelector('form');
+form.addEventListener('submit', addBookToLibrary);
 
 function addBookToLibrary(event) {
   // handle the form data
   event.preventDefault();
-  let  bookName = document.getElementById('title').value;
-  let  authorName = document.getElementById('author').value;
-  let  numberOfpages = document.getElementById('pages').value;
-  let  bookStatus = document.getElementById('status').checked;
-  let  book = new Book(bookName,authorName,numberOfpages,bookStatus);
-  display(book);
+  let bookName = document.getElementById('title').value;
+  let authorName = document.getElementById('author').value;
+  let numberOfpages = document.getElementById('pages').value;
+  let bookStatus = document.getElementById('status').checked;
+  let book = new Book(bookName, authorName, numberOfpages, bookStatus);
   myLibrary.push(book);
-  console.log(myLibrary);
+  updateLocalStorage();
+  display();
+  form.reset();
+
+  // console.log(myLibrary);
   modal.style.display = "none"
 
-} 
+}
 
-form.addEventListener('submit', addBookToLibrary);
+function updateLocalStorage() {
+  window.localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+}
+
+function restore() {
+      let objects = window.localStorage.getItem('myLibrary');
+      objects = JSON.parse(objects);
+      console.log(objects);
+      if(objects != null)
+      {
+        for(let i=0; i<objects.length; i++)
+          myLibrary.push(objects[i]);
+          
+      }
+      console.log(myLibrary);
+      display();
+  
+}
+restore();
+
 
 
 
