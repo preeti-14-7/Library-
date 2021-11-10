@@ -78,12 +78,13 @@ function updateLocalStorage() {
 function restore() {
       let objects = window.localStorage.getItem('myLibrary');
       objects = JSON.parse(objects);
-      if(objects != null)
-      {
-        for(let i=0; i<objects.length; i++)
-          myLibrary.push(objects[i]);
+      // if(objects != null)
+      // {
+      //   for(let i=0; i<objects.length; i++)
+      //     myLibrary.push(objects[i]);
           
-      }
+      // }
+      Array.prototype.push.apply(myLibrary,objects);
       display();
   
 }
