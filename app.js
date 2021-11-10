@@ -18,6 +18,7 @@ function display() {
  
   const list = document.querySelector('#book-list');
   list.innerHTML = "";
+
   if(myLibrary != null)
   myLibrary.forEach((book) => {
     const row = document.createElement('tr');
@@ -60,7 +61,10 @@ function addBookToLibrary(event) {
   let authorName = document.getElementById('author').value;
   let numberOfpages = document.getElementById('pages').value;
   let bookStatus = document.getElementById('status').checked;
-  let book = new Book(bookName, authorName, numberOfpages, bookStatus);
+  let isRead = "No";
+  if(bookStatus === true)
+  isRead = "Yes";
+  let book = new Book(bookName, authorName, numberOfpages, isRead);
   myLibrary.push(book);
   updateLocalStorage();
   display();

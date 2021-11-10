@@ -8,6 +8,7 @@ body {
   right: 30px;
   padding: 15px;
   background-color: blueviolet;
+  border-radius: 15%;
 }
 .newbook:hover,
 .submit:hover {
@@ -17,12 +18,20 @@ body {
 .material-icons {
   font-family: "Material Icons";
 }
-
-#pop {
+.submit{
+  padding: 15px;
+  background-color: blueviolet;
+ 
+}
+.form-content {
   padding: 15px;
   display: flex;
+  border-radius: 2%;
 }
-
+ h1{
+  font-family: 'Mochiy Pop P One', sans-serif;
+  color: rgb(212, 179, 243);
+ }
 .container {
   display: none;
   position: fixed;
@@ -38,17 +47,29 @@ body {
 .form-content {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 16px;
   position: relative;
   background-color: white;
   padding: 20px;
   margin: auto;
-  width: 40%;
+  width: 20%;
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
   animation-name: animatetop;
   animation-duration: 0.4s;
 }
+.form-content b{
+  color: blueviolet;
+  font-family: 'Mochiy Pop P One', sans-serif;
+}
+input{
+  background-color: transparent;
+  border-radius: 2%;
+  padding: 5%;
+  font-family: monospace;
+  border-color: blueviolet;
+}
+
 @-webkit-keyframes animatetop {
   from {
     top: -300px;
@@ -72,17 +93,57 @@ body {
 
 table {
   font-family: arial, sans-serif;
-  border-collapse: collapse;
+
   width: 100%;
 }
 
 td,
 th {
-  border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
 }
 
 tr:nth-child(even) {
   background-color: #dddddd;
+}
+
+.tbl {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.tbl thead tr {
+  background-color: blueviolet;
+  color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+  font-size: 1.5rem;
+  font-family: 'Oswald', sans-serif;
+}
+.tbl thead tr:hover{
+  background-color: burlywood;
+}
+.tbl th,
+.tbl td {
+    padding: 12px 15px;
+}
+
+.tbl tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.tbl tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.tbl tbody tr:last-of-type {
+  border-bottom: 2px solid blueviolet;
+}
+
+.tbl tbody tr.active-row {
+  font-weight: bold;
+  color: #009879;
 }
