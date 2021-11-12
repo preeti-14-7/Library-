@@ -1,4 +1,5 @@
 
+//const  deleteBook = document.querySelector('remove') ;
 
 
 let myLibrary = [];
@@ -18,7 +19,7 @@ function display() {
  
   const list = document.querySelector('#book-list');
   list.innerHTML = "";
-
+ 
   if(myLibrary != null)
   myLibrary.forEach((book) => {
     const row = document.createElement('tr');
@@ -27,7 +28,7 @@ function display() {
       <td>${book.author}</td>
       <td>${book.pages}</td>
       <td>${book.isRead}</td>
-      <td><a href="#" class="btn btn-danger btn-sm delete">X</a></td>
+      <td><button class="remove">Delete</button></td>
     `;
     list.appendChild(row);
   });
@@ -67,33 +68,27 @@ function addBookToLibrary(event) {
   let book = new Book(bookName, authorName, numberOfpages, isRead);
   myLibrary.push(book);
   updateLocalStorage();
-  display();
   form.reset();
-
-  // console.log(myLibrary);
   modal.style.display = "none"
 
 }
 
+
+
 function updateLocalStorage() {
   window.localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+  restore();
 }
 
 function restore() {
       let objects = window.localStorage.getItem('myLibrary');
       objects = JSON.parse(objects);
-      // if(objects != null)
-      // {
-      //   for(let i=0; i<objects.length; i++)
-      //     myLibrary.push(objects[i]);
-          
-      // }
-      Array.prototype.push.apply(myLibrary,objects);
+      if(objects != null)
+      myLibrary = objects;
       display();
-  
 }
-restore();
 
+window.onload = restore();
 
 
 
