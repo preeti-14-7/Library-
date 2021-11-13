@@ -1,5 +1,5 @@
 
-//const  deleteBook = document.querySelector('remove') ;
+
 
 
 let myLibrary = [];
@@ -14,24 +14,48 @@ function Book(title, author, pages, isRead) {
 }
 
 
+const deleteBook = document.querySelector('tbody');
+const changeStatus = document.getElementsByClassName('.slide');
 
 function display() {
- 
+
   const list = document.querySelector('#book-list');
   list.innerHTML = "";
- 
-  if(myLibrary != null)
-  myLibrary.forEach((book) => {
-    const row = document.createElement('tr');
-    row.innerHTML = `
+  let i = 0;
+  if (myLibrary != null)
+    myLibrary.forEach((book) => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
       <td>${book.title}</td>
       <td>${book.author}</td>
       <td>${book.pages}</td>
-      <td>${book.isRead}</td>
-      <td><button class="remove">Delete</button></td>
+      <td>
+      <label class="switch" >
+      <input data-index="${i}" type="checkbox" class = "slide" ${book.isRead ? 'checked' : ''
+        }>
+      <span class="slider round"></span>
+      </label>
+
+      </td>
+      <td><button data-index="${i}" class="remove">Delete</button></td>
     `;
-    list.appendChild(row);
-  });
+      list.appendChild(row);
+      i++;
+    });
+
+}
+
+function removeBook(e) {
+  if (e.target.classList.contains('remove')) {
+    e.target.parentElement.parentElement.remove();
+    const index = +e.target.getAttribute("data-index");
+    myLibrary.splice(index, 1);
+    const removeBtn = document.querySelectorAll('.removeBtn');
+    for (let i = 0; i < removeBtn.length; i++) {
+      removeBtn[i].setAttribute('data-index', i);
+    }
+    localStorage.setItem('myLibrary', JSON.stringify(myLibrary))
+  }
 
 }
 
@@ -55,6 +79,10 @@ window.onclick = function (e) {
 const form = document.querySelector('form');
 form.addEventListener('submit', addBookToLibrary);
 
+
+
+
+
 function addBookToLibrary(event) {
   // handle the form data
   event.preventDefault();
@@ -62,10 +90,8 @@ function addBookToLibrary(event) {
   let authorName = document.getElementById('author').value;
   let numberOfpages = document.getElementById('pages').value;
   let bookStatus = document.getElementById('status').checked;
-  let isRead = "No";
-  if(bookStatus === true)
-  isRead = "Yes";
-  let book = new Book(bookName, authorName, numberOfpages, isRead);
+
+  let book = new Book(bookName, authorName, numberOfpages, bookStatus);
   myLibrary.push(book);
   updateLocalStorage();
   form.reset();
@@ -75,21 +101,32 @@ function addBookToLibrary(event) {
 
 
 
+
+
+function changeBook(e){
+  if (e.target.classList.contains('slide')) {
+    const index = +e.target.getAttribute("data-index");
+    myLibrary[index].isRead = !(myLibrary[index].isRead);
+    localStorage.setItem('myLibrary', JSON.stringify(myLibrary))
+  }
+  
+}
+
+deleteBook.addEventListener('click',changeBook);
+deleteBook.addEventListener('click', removeBook);
+
 function updateLocalStorage() {
   window.localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
   restore();
 }
 
 function restore() {
-      let objects = window.localStorage.getItem('myLibrary');
-      objects = JSON.parse(objects);
-      if(objects != null)
-      myLibrary = objects;
-      display();
+  let objects = window.localStorage.getItem('myLibrary');
+  objects = JSON.parse(objects);
+  if (objects != null)
+    myLibrary = objects;
+  display();
 }
-
-window.onload = restore();
-
-
+restore();
 
 
