@@ -11,11 +11,7 @@ body {
   background-color: blueviolet;
   border-radius: 15%;
 }
-.bottom{
-  position:absolute;
-  bottom:0px;
-  left:40%;
-}
+
 .newbook:hover,
 .submit:hover ,.remove:hover{
   background-color: burlywood;
